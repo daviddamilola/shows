@@ -176,7 +176,8 @@ export function SearchProvider({children}) {
             const {data} = response;
             return data;
         } catch(error) {
-
+            if(error.response) alert(error.response?.mesage)
+            alert(error.toString())
         }
     }
 
@@ -187,7 +188,8 @@ export function SearchProvider({children}) {
             console.log('data is', data)
             return data;
         } catch (error) {
-            
+            if(error.response) alert(error.response?.mesage)
+            alert(error.toString())
         }
     }
 
