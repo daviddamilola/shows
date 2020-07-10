@@ -3,11 +3,10 @@ import React from 'react';
 
 export default function Spinner() {
     return (
-        <>
-            <div class="loadingio-spinner-spinner-4hr1fajfqix"><div class="ldio-zp4yfngu94">
-                <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+        <div className="col col__center">
+            <div class="loadingio-spinner-blocks-emfe2msf4ys"><div class="ldio-t2erk8hzhjl">
+                <div style={{ left: '38px', top: '38px', animationDelay: '0s' }}></div><div style={{ left: '80px', top: '38px', animationDelay: '0.125s' }}></div><div style={{left:'122px',top:"38px",animationDelay:'0.25s'}}></div><div style={{left:'38px',top:'80px',animationDelay:'0.875s'}}></div><div style={{left:'122px',top:'80px',animationDelay:'0.375s'}}></div><div style={{left:'38px',top:'122px',animationDelay:'0.75s'}}></div><div style={{left:'80px',top:'122px',animationDelay:'0.625s'}}></div><div style={{left:'122px',top:'122px',animationDelay:'0.5s'}}></div>
             </div></div>
-
-        </>
+        </div>
     )
 }

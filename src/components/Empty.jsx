@@ -4,7 +4,7 @@ import '../css/prompt.css'
 
 function EmptyResult() {
     return (
-       <div className="col col__centerempty empty">
+       <div className="col col__center empty">
            <h5 className="text__center text-s-sm">
                 Nothing Found Here, Search For Something Different
            </h5>
