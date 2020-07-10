@@ -3,10 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import ErrorBoundary from './ErrorBoundary';
 
 ReactDOM.render(
   <React.StrictMode>
+    <ErrorBoundary render={() => <p style={{textAlign: "center",fontWeight:"1rem"}}>Oops...an error occured! Our system <br /> logged the bug and we fix it right away.</p>}> 
     <App />
+    </ErrorBoundary>
   </React.StrictMode>,
   document.getElementById('root')
 );
