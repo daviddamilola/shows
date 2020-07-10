@@ -1,0 +1,61 @@
+.main-box{
+    width: 100%;
+    height: 400px;
+    
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: overlay;
+}
+.main-text{
+    position: relative;
+    z-index: 4;
+    width: 100%;
+}
+.summary p{
+    width: 70%;
+}
+.genre{
+    list-style: none;
+    
+    padding-inline-start: 0px;
+}
+.genre-item{
+    list-style: none;
+    margin-Right: 5px;
+}
+.side-box{
+    max-height: 32em;
+    position: static;
+}
+.episodes-container{
+    height:500px;
+    overflow-y: scroll;
+}
+.truncate {
+  width: 100%;
+  height: 3em;
+  white-space: wrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.card{
+    width: 28%;
+    padding: 0.4em;
+}
+.card-body{
+    
+}
+.card-body p{
+    font-size: 1rem;
+}
+.lastImage{
+    width:100%;
+    height:200px;
+}
+
+@media only screen and (max-width: 768px) {
+    .card{
+        width: 100%;
+    }
+}

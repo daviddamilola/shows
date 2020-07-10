@@ -19,6 +19,7 @@ const initialState = {
     sortBy: '',
     filteredResult: [],
     episodes: [],
+    isLoading: false,
 }
 
 const filterEpisodes = (filters, episodes) => {
@@ -26,6 +27,43 @@ const filterEpisodes = (filters, episodes) => {
 }
 
 const sortMovies = (filteredResult, sortBy) => {
+    switch (sortBy) {
+        case 'time':
+            return filteredResult.sort((first, second) => {
+                const firstTime = new Date(first.airtime);
+                const secondTime = new Date(second.airtime);
+                return firstTime> secondTime ? -1 : 1;
+            })
+
+        case 'date':
+            return filteredResult.sort((first, second) => {
+                const firstDate = new Date(first.airstamp);
+                const secondDate = new Date(second.airstamp);
+                return firstDate> secondDate ? -1 : 1;
+            })
+        case 'duration':
+            return filteredResult.sort((first, second) => {
+                const firstDate = parseFloat(first.runtime);
+                const secondDate = parseFloat(second.runtime);
+                return firstDate> secondDate ? -1 : 1;
+            })
+        case 'Ascending':
+            return filteredResult.sort((first, second) => {
+				return first.name > second.name ? 1 : -1;
+			})
+        case 'Descending':
+            return filteredResult.sort((first, second) => {
+				return first.name < second.name ? 1 : -1;
+			})
+        case 'epiAsc':
+
+            break;
+        case 'epiDsc':
+
+            break;   
+        default:
+            break;
+    }
     return []
 }
 
@@ -58,21 +96,29 @@ const actions = {
 }
 
 
-const searchReducer = (state, action) => {
+function searchReducer(state, action){
     switch (action.type) {
         case constants.search:
             return {
+                ...state,
                 currentSearchTerm: action.currentSearchTerm,
+                isLoading: true,
+                
             }
         case constants.updateResult:
             const { _embedded: { episodes } } = action.searchResult;
             return {
+                ...state,
                 searchResult: action.searchResult,
                 episodes,
+                filteredResult: episodes,
+                isLoading: false,
+                
             }
         case constants.updateFilter:
             const filters = [...state.filters, action.filter];
             return {
+                ...state,
                 filters,
                 filteredResult: filterEpisodes(filters, state.episodes)
             }
@@ -80,23 +126,30 @@ const searchReducer = (state, action) => {
             //filter state.filters and remove only the name matching action.filter
             const reducedFilters = state.filters.filter((each) => each !== action.filter)
             return {
+                ...state,
                 filteredResult: filterEpisodes(reducedFilters, state.episodes)
             }
         case constants.sort:
             const { sortBy } = action;
             return {
+                ...state,
                 sortBy,
                 filteredResult: sortMovies(state.filteredResult, sortBy)
             }
         
         default:
-            break;
+            return state;
     }
 }
 
 export function SearchProvider({children}) {
 
-    const {state, dispatch} = React.useReducer(searchReducer, initialState);
+    const [state, dispatch] = React.useReducer(searchReducer, initialState);
+
+    // React.useEffect(() => {
+    //     searchMovie('merlin')
+    // }, [])
+
 
     const searchMovie = (title) => {
         dispatch(actions[constants.search](title));
@@ -110,10 +163,35 @@ export function SearchProvider({children}) {
     const sort = (by) => {
         return dispatch(actions[constants.sort](by))
     }
-
+  
     const loadSearch = async (query) => {
-        const result = await api.get(`?q=${query}&embed=episodes`)
-        return dispatch(actions[constants.updateResult](result))
+        try {
+            const response = await api.get(`/singlesearch/shows/?q=${query}&embed=episodes`)
+            const {data} = response;
+            return dispatch(actions[constants.updateResult](data))
+        } catch (error) {
+            
+        }
+    }
+    const loadSingleEpisode = async (id) => {
+        try{
+            const response = await api.get(`/episodes/${id}`)
+            const {data} = response;
+            return data;
+        } catch(error) {
+
+        }
+    }
+
+    const getOptions = async (query) => {
+        try {
+            console.log('called')
+            const {data} = await api.get(`/search/shows?q=${query}`);
+            console.log('data is', data)
+            return data;
+        } catch (error) {
+            
+        }
     }
 
     return (
@@ -122,6 +200,8 @@ export function SearchProvider({children}) {
             searchMovie,
             filterMovies,
             sort,
+            loadSingleEpisode,
+            getOptions,
         }}>
             {children}
         </SearchContext.Provider>

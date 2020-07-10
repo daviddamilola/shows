@@ -1,10 +1,15 @@
-import React from 'react'
+import React from 'react';
+import Result from './Result';
+import Layout from '../hoc/Layout'
 
 function Home() {
     return (
-        <div>
-            <h1>Index of the application</h1>
-        </div>
+        <>
+            <Layout>
+                <Result />
+            </Layout>
+            
+        </>
     )
 }
 

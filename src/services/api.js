@@ -1,9 +1,9 @@
 import Axios from "axios";
 
 let urls = {
-    test: `https://api.tvmaze.com/singlesearch/shows/`,
-    development: 'https://api.tvmaze.com/singlesearch/shows/',
-    production: 'https://api.tvmaze.com/singlesearch/shows/'
+    test: `https://api.tvmaze.com`,
+    development: 'https://api.tvmaze.com',
+    production: 'https://api.tvmaze.com'
 }
 
 const api = Axios.create({
