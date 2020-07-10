@@ -146,10 +146,6 @@ export function SearchProvider({children}) {
 
     const [state, dispatch] = React.useReducer(searchReducer, initialState);
 
-    // React.useEffect(() => {
-    //     searchMovie('merlin')
-    // }, [])
-
 
     const searchMovie = (title) => {
         dispatch(actions[constants.search](title));
@@ -170,7 +166,8 @@ export function SearchProvider({children}) {
             const {data} = response;
             return dispatch(actions[constants.updateResult](data))
         } catch (error) {
-            
+            if(error.response) alert(error.response?.mesage)
+            alert(error.toString())
         }
     }
     const loadSingleEpisode = async (id) => {

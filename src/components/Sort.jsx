@@ -12,7 +12,7 @@ function Sort() {
 
     return (
         <div className='row row__center ml-1'>
-            <label className='col-3' htmlFor="sort_values">Sort By:</label>
+            <label className='col-3 text-sm' htmlFor="sort_values">Sort By:</label>
             <select name="sort_values" onChange={handleSort} id="sort_values" className='col-9 py2 rounded outlined'>
                 <option value="time">Time</option>
                 <option value="date">Date</option>

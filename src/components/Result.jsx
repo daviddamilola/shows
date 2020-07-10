@@ -1,6 +1,5 @@
 import React from 'react';
 import Sort from './Sort';
-import Filters from './Filters';
 import useSearch from '../context/search';
 import Spinner from './Spinner';
 import Rating from './Rating';
@@ -9,6 +8,7 @@ import LastCard from './LastCard';
 import Card from './Card';
 import dompurify from 'dompurify';
 import Prompt from './Prompt';
+import EmptyResponse from './Empty';
 
 
 function Result() {
@@ -42,7 +42,7 @@ function Result() {
                         })}
                     </ul>
                     <h5>Previous Episode</h5>
-                    <LastCard prevEpisode={result._links.previousepisode.href} episodes={episodes}/>
+                    {result?._links && <LastCard prevEpisode={result?._links?.previousepisode?.href} episodes={episodes}/>}
                 </div>}
                 
                 {/* <Filters /> */}
@@ -50,15 +50,19 @@ function Result() {
             <div className="col-8 outlined rounded mb-4">
                 {!result && !isLoading && <Prompt />}
                 {isLoading && <Spinner />}
+                
                     {!isLoading && result && <div>
                     <div className="col-12 main-box rounded flush-bottom" style={{
-                        backgroundImage:`url(${result.image.original})`,
+                        backgroundImage:`url(${result?.image?.original})`,
                         }}>
+                            {!result?.name ? <EmptyResponse />:
                             <div className="px2 py2 main-text white text-sm">
-                                <h2 className='text__left white'>{result.name}</h2>
-                                <span className='summary wrap text-light' dangerouslySetInnerHTML={{__html: sanitizer(result.summary)}} />
-                                <p className='text-xs'>premiered: <span className='bg-green px1 py1 rounded'>{result.premiered}</span></p>
-                            </div>
+                            <h2 className='text__left white'>{result?.name}</h2>
+                            <span className='summary wrap text-light inner' dangerouslySetInnerHTML={{__html: sanitizer(result.summary)}} />
+                            <p className='text-xs'>premiered: <span className='bg-green px1 py1 rounded'>{result.premiered}</span></p>
+                        </div>
+                            }
+                            
                     </div>
 
                     <div className="px2 my2 mt-1 ">
@@ -67,7 +71,7 @@ function Result() {
                         <div className="col-4"><Sort /></div>
                         </div>
                         <div className="row row__spread episodes-container">
-                           {episodes.map((each, i) => <Card detail={each} key={i}/>) }
+                           {episodes? episodes.map((each, i) => <Card detail={each} key={i}/>) : <EmptyResponse />}
                         </div>
                     </div>
                     </div>

@@ -190,6 +190,9 @@ padding-right: 1em;
 .outlined{
   border: 1px solid #DEDEDE;
 }
+a{
+  color: #170d01;
+}
 
 @media only screen and (max-width: 768px) {
    /* For mobile phones: */

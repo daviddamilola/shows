@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react'
 import {useParams} from 'react-router-dom';
 import useSearch from '../context/search';
@@ -25,6 +26,7 @@ function SingleEpisode() {
         }
             loadEpisode();
         }
+        // eslint-disable-next-line eqeqeq
         setSingle(episodes.find(each => each.id == id))
         setMore(episodes.slice(0,getRandomInt(3,episodes.length )))
     }, [id, episodes])

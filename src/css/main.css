@@ -43,8 +43,10 @@
     width: 28%;
     padding: 0.4em;
 }
-.card-body{
-    
+.inner p{
+    max-height: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .card-body p{
     font-size: 1rem;
@@ -57,5 +59,11 @@
 @media only screen and (max-width: 768px) {
     .card{
         width: 100%;
+    }
+    .inner p{
+        font-size: 0.9rem;
+        max-height: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
     }
 }

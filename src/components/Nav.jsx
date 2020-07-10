@@ -40,7 +40,7 @@ function Nav() {
             <form onSubmit={handleSearch} className="row search self-left col-6">
                 <input className='col-8 col-s-6 py1 px1 rounded flush-left' value={state.search} onChange={handleChange} placeholder='search for you favourite tv shows' list="shows" name="search" id="search" />
                 <datalist id="shows">
-                    {options.map(({ show: { name } }, i) => <option key={i} value={name} />)}
+                    {options && options.map(({ show: { name } }, i) => <option key={i} value={name} />)}
 
                 </datalist>
                 <button type='submit' className='px1 bg-black white col-3 col-s-4 rounded flush-right'> Search </button>

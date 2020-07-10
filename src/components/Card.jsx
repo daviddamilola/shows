@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 function Card({detail, styles}) {
  
-    const { id,name,summary, season,runtime, image } = detail
+    const { id,name,summary, image } = detail
     const paragraphs = summary?.split('<p>')?.splice(1)?.map(each => each.replace('</p>', ""))
     
 

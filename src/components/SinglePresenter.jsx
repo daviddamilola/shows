@@ -3,7 +3,7 @@ import SingleInfo from './SingleInfo';
 
 
 function SinglePresenter({detail}) {
-    const { id,name,summary, season,runtime, image } = detail
+    const { summary, image } = detail
     const paragraphs = summary?.split('<p>')?.splice(1)?.map(each => each.replace('</p>', ""))
     return (
         <>
