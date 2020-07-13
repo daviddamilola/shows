@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/b7a8cfa7-4142-4917-9551-90077eabe7e9/deploy-status)](https://app.netlify.com/sites/pedantic-hypatia-4a2f12/deploys)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
